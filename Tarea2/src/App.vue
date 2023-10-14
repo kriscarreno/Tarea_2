@@ -14,7 +14,10 @@
 <style scoped>
 .app{
   height: 100%;
+  width: 100%;
+ 
 }
+
 .app h1{
   text-align: center;
   margin-bottom: 30px;
