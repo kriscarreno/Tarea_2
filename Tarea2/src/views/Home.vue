@@ -38,28 +38,27 @@ const unShowUpdate=(item)=>{
     <div class="main">
     <div class="container">
       <h2>Proyectos</h2>
+      <button @click="this.$router.push('/addproject')">Crear Proyecto</button>
       <div>
       <ul  v-for="item in store.getProjects" :key="item.name">
         <li class="listItem">
-           <span>{{item.name}}</span>
+           <span>Project: {{item.name}}</span>
           <div id="project">
-          <a @click="store.deleteProject(item)"><span>Eliminar</span></a>
+          <a @click="(store.deleteProject(item),activities=[])"><span>Eliminar</span></a>
           <a @click="activities=item.activities"><span>Mostrar actividades</span></a>
           <a @click="this.$router.push(`/addactivity${item.name}`)"><span>Añadir actividad</span></a>
           <a v-if="!item.show" @click="showUpdate(item)"><span>Actualizar Proyecto</span></a>
           <input placeholder="Define a new Name" class="inpUp" v-model="name"  v-if="item.show" type="text"/>
           <a v-if="item.show" @click="updateItem(item)"><span>Actualizar</span></a>
           <a v-if="item.show" @click="unShowUpdate(item)"><span>Cancelar</span></a>
-          
           </div>
         </li>
       </ul>
       </div>
-      <button @click="this.$router.push('/addproject')">Crear Proyecto</button>
     </div>
     <div class="container">
       <h2>Actividades de Proyecto</h2>
-      <div>
+      <div style="height: 50px;">
         <select v-model="selectedStatus">
           <option value="">Todos</option>
           <option value="true">Completado</option>
@@ -67,7 +66,7 @@ const unShowUpdate=(item)=>{
         </select>
       </div>
       <div>
-        <h3 v-if="activities.length>0">{{ activities[0].project }}</h3>
+        <h3 v-if="activities.length>0">Project: {{ activities[0].project }}</h3>
         <h3 v-if="activities.length===0">No hay actividades para mostrar</h3>
         <ul >
           <li class="listItem" v-for="item in activitiesFiltred" :key="item.name">
@@ -120,11 +119,11 @@ const unShowUpdate=(item)=>{
       list-style: none;
     }
     .listItem{
+        height: 80px;
         padding:10px;
         font-size: larger;
         font-weight: 500;
         cursor: pointer;
-      
     }
     .listItem div{
       display: flex;
@@ -141,6 +140,8 @@ const unShowUpdate=(item)=>{
       margin-bottom: 10px;
     }
     .listItem a{
+      margin-top: 10px;
+      margin-bottom: 10px;
       padding-inline: 10px;
       background: #ffffff;
       border-radius:10px ;
